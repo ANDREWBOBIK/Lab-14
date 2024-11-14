@@ -1,0 +1,122 @@
+Завдання 1:
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Створюємо масив значень x від 0 до 5
+x = np.linspace(0, 5, 500)
+
+# Обчислюємо значення функції Y(x)
+y = np.sqrt(x) * np.sin(10 * x)
+
+# Створюємо графік
+plt.plot(x, y, label=r'$Y(x) = \sqrt{x} \cdot \sin(10x)$', color='blue', linewidth=2)
+
+# Додаємо підписи до осей
+plt.xlabel('x')
+plt.ylabel('Y(x)')
+
+# Додаємо заголовок графіку
+plt.title('Графік функції $Y(x) = \sqrt{x} \cdot \sin(10x)$')
+
+# Додаємо легенду
+plt.legend()
+
+# Показуємо графік
+plt.grid(True)  # Додаємо сітку для кращої видимості
+plt.show()
+
+
+
+
+Завдання 2.1
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Завантажуємо дані з CSV файлу
+# Приклад формату CSV:
+# Year,Ukraine,USA
+# 2000,10000,5000
+# 2001,9500,4800
+# 2002,9200,4600
+# ...
+
+data = pd.read_csv('children_out_of_school.csv')
+
+# Створення графіка динаміки показників для двох країн
+plt.plot(data['Year'], data['Ukraine'], label='Ukraine', color='blue', linewidth=2)
+plt.plot(data['Year'], data['USA'], label='USA', color='red', linewidth=2)
+
+# Підписи осей
+plt.xlabel('Year')
+plt.ylabel('Children out of school (Primary)')
+
+# Заголовок графіка
+plt.title('Children out of school (Primary) for Ukraine and USA')
+
+# Легенда
+plt.legend()
+
+# Показуємо графік
+plt.grid(True)
+plt.show()
+
+
+
+
+Завдання 2.2
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Завантажуємо дані з CSV файлу
+data = pd.read_csv('children_out_of_school.csv')
+
+# Вводимо назву країни
+country = input("Enter the country name (Ukraine or USA): ").strip().title()
+
+# Перевіряємо, чи є така країна в даних
+if country not in data.columns:
+    print(f"Data for {country} is not available.")
+else:
+    # Створюємо масив даних для побудови графіку для вибраної країни
+    years = data['Year']
+    values = data[country]
+
+    # Побудова стовпчастої діаграми для обраної країни
+    plt.bar(years, values, color='green')
+
+    # Підписи осей
+    plt.xlabel('Year')
+    plt.ylabel('Children out of school (Primary)')
+
+    # Заголовок діаграми
+    plt.title(f'Children out of school (Primary) for {country}')
+
+    # Показуємо діаграму
+    plt.grid(True)
+    plt.show()
+
+
+Завдання 3:
+
+import matplotlib.pyplot as plt
+
+# Дані для кругової діаграми (відсотки дівчат і хлопців)
+labels = ['Girls', 'Boys']
+sizes = [60, 40]  # 60% дівчат, 40% хлопців
+colors = ['#ff9999', '#66b3ff']  # Вибір кольорів для секторів
+explode = (0.1, 0)  # Виділяємо перший сектор (дівчат)
+
+# Створюємо кругову діаграму
+plt.pie(sizes, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', startangle=90, pctdistance=0.85)
+
+# Додаємо круг в центр для вигляду "донат"
+centre_circle = plt.Circle((0,0), 0.70, color='white', fc='white')
+plt.gca().add_artist(centre_circle)
+
+# Заголовок
+plt.title('Percentage of Girls and Boys in the Class')
+
+# Відображення діаграми
+plt.axis('equal')  # Щоб діаграма виглядала як коло
+plt.show()
